@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scene/LoginScene.unity
+    guid: e84643a83b8cc614b9ea49790cd1ae27
+  - enabled: 1
+    path: Assets/Scene/ArScene.unity
+    guid: 5af2be2792e7b3148bc5a166a356ae9d
+  - enabled: 1
+    path: Assets/Scene/human_abdomen.unity
+    guid: e265f1f0eebb02c4d87c4d4f308acd6f
+  - enabled: 1
+    path: Assets/Scene/DrawScene.unity
+    guid: 109960131fd14d242a255032537567d4
+  - enabled: 1
+    path: Assets/Scene/HeartScene.unity
+    guid: 5ce413d3a3fda134ea1f8b8a6e90ef22
+  - enabled: 1
+    path: Assets/Scene/HouseScene.unity
+    guid: a5dde7bb441ce244ba6de5ffd1ac287a
+  - enabled: 1
+    path: Assets/Scene/MainScene.unity
+    guid: 8003258e5e42c7049a0cfccec41c445e
+  - enabled: 1
+    path: Assets/Scene/OfficeScene.unity
+    guid: e75cf5272aa6daa4fad653e5d8e3247c
+  - enabled: 1
+    path: Assets/Scene/RobotScene.unity
+    guid: 04183f526006eaa428cca052c832f97c
+  - enabled: 1
+    path: Assets/Scene/ShowroomScene.unity
+    guid: 6133b395171f74449aa8e308224f7698
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 919ff98e6f5fb5d4fa7b6eedbeda8f56, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e96628f7d1a59394c8d8931f9605e526, type: 2}
