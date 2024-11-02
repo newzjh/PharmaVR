@@ -156,7 +156,7 @@ namespace UnifiedInput
                 //    ret.Hit = true;
                 //}
                 //else
-                if (RayInteractor.GetLinePoints(ref linePoints, ref numPoints))
+                if (RayInteractor.GetLinePoints(ref linePoints, out numPoints))
                 {
                     if (numPoints>=2)
                     {

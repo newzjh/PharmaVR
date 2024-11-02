@@ -3477,7 +3477,7 @@ class PlaygroundParticleSystemInspectorC : Editor {
 		if (playgroundScriptReference.drawGizmos && playgroundScriptReference.drawSourcePositions) {
 			Handles.color = new Color(1f,1f,.2f,.2f);
 			for (int pos = 0; pos<playgroundParticlesScriptReference.playgroundCache.targetPosition.Length; pos++) {
-				Handles.DotCap(0, playgroundParticlesScriptReference.playgroundCache.targetPosition[pos], cameraRotation, .025f);
+				Handles.DotHandleCap(0, playgroundParticlesScriptReference.playgroundCache.targetPosition[pos], cameraRotation, .025f, EventType.MouseMove);
 			}
 		}
 		
@@ -3504,7 +3504,7 @@ class PlaygroundParticleSystemInspectorC : Editor {
 			}
 			if (drawPoint) {
 				Handles.color = new Color(1f,1f,.2f,.6f);
-				Handles.CircleCap(0, sortOriginPosition, cameraRotation, HandleUtility.GetHandleSize(sortOriginPosition)*.05f);
+				Handles.CircleHandleCap(0, sortOriginPosition, cameraRotation, HandleUtility.GetHandleSize(sortOriginPosition)*.05f, EventType.MouseMove);
 				Handles.color = new Color(1f,.7f,.2f,.2f);
 				Handles.DrawSolidDisc(sortOriginPosition, Camera.current.transform.forward, HandleUtility.GetHandleSize(sortOriginPosition)*.2f);
 			}
@@ -3639,13 +3639,13 @@ class PlaygroundParticleSystemInspectorC : Editor {
 					if (playgroundParticlesScriptReference.paint.collisionType==COLLISIONTYPEC.Physics3D) {
 						if (Physics.Raycast(mouseRay, out eraserHit, 10000f, playgroundParticlesScriptReference.paint.layerMask)) {
 							Handles.color = new Color(0f,0f,0f,.4f);
-							Handles.CircleCap(-1, eraserHit.point, Quaternion.LookRotation(mouseRay.direction), eraserRadius);
+							Handles.CircleHandleCap(-1, eraserHit.point, Quaternion.LookRotation(mouseRay.direction), eraserRadius, EventType.MouseMove);
 						}
 					} else {
 						eraserHit2d = Physics2D.Raycast (mouseRay.origin, mouseRay.direction, 100000f, playgroundParticlesScriptReference.paint.layerMask, playgroundParticlesScriptReference.paint.minDepth, playgroundParticlesScriptReference.paint.maxDepth);
 						if (eraserHit2d.collider!=null) {
 							Handles.color = new Color(0f,0f,0f,.4f);
-							Handles.CircleCap(-1, eraserHit2d.point, Quaternion.LookRotation(mouseRay.direction), eraserRadius);
+							Handles.CircleHandleCap(-1, eraserHit2d.point, Quaternion.LookRotation(mouseRay.direction), eraserRadius, EventType.MouseMove);
 						}
 					}
 				}
@@ -3654,7 +3654,7 @@ class PlaygroundParticleSystemInspectorC : Editor {
 				// Spacing preview
 				if (selectedPaintMode!=2) {
 					Handles.color = new Color(.3f,1f,.3f,.3f);
-					Handles.CircleCap(-1, playgroundParticlesScriptReference.paint.lastPaintPosition, Quaternion.LookRotation(Camera.current.transform.forward), playgroundParticlesScriptReference.paint.spacing);
+					Handles.CircleHandleCap(-1, playgroundParticlesScriptReference.paint.lastPaintPosition, Quaternion.LookRotation(Camera.current.transform.forward), playgroundParticlesScriptReference.paint.spacing, EventType.MouseMove);
 				}
 				
 				if (e.type  == EventType.KeyDown)

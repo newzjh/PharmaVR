@@ -155,7 +155,7 @@ public class PlaygroundInspectorC : Editor {
 			}
 			
 			Handles.DrawLine(thisManipulator.transform.transform.position, manipulatorHandlePosition);
-			thisManipulator.strength = Handles.ScaleValueHandle(thisManipulator.strength, manipulatorHandlePosition, Quaternion.identity, HandleUtility.GetHandleSize(manipulatorHandlePosition), Handles.SphereCap, 1);      
+			thisManipulator.strength = Handles.ScaleValueHandle(thisManipulator.strength, manipulatorHandlePosition, Quaternion.identity, HandleUtility.GetHandleSize(manipulatorHandlePosition), Handles.SphereHandleCap, 1);      
 			if (thisManipulator.enabled && GUIUtility.hotControl>0)
 				Handles.Label(manipulatorHandlePosition+new Vector3(1f,1f,0f), playgroundLanguage.strength+" "+thisManipulator.strength.ToString("f2"));
 			
@@ -231,9 +231,9 @@ public class PlaygroundInspectorC : Editor {
 		Handles.DrawLine(boxFrontBottomRight, boxBackBottomRight);
 		
 		// Draw extents handles
-		boxFrontDot = Handles.Slider(boxFrontDot, manipulator.transform.right, HandleUtility.GetHandleSize(boxFrontDot)*.03f, Handles.DotCap, 0f);
-		boxUpDot = Handles.Slider(boxUpDot, manipulator.transform.up, HandleUtility.GetHandleSize(boxUpDot)*.03f, Handles.DotCap, 0f);
-		boxLeftDot = Handles.Slider(boxLeftDot, manipulator.transform.forward, HandleUtility.GetHandleSize(boxLeftDot)*.03f, Handles.DotCap, 0f);
+		boxFrontDot = Handles.Slider(boxFrontDot, manipulator.transform.right, HandleUtility.GetHandleSize(boxFrontDot)*.03f, Handles.DotHandleCap, 0f);
+		boxUpDot = Handles.Slider(boxUpDot, manipulator.transform.up, HandleUtility.GetHandleSize(boxUpDot)*.03f, Handles.DotHandleCap, 0f);
+		boxLeftDot = Handles.Slider(boxLeftDot, manipulator.transform.forward, HandleUtility.GetHandleSize(boxLeftDot)*.03f, Handles.DotHandleCap, 0f);
 		
 		manipulator.bounds.extents = new Vector3(
 			manipulator.transform.transform.InverseTransformPoint(boxFrontDot).x-manipulator.bounds.center.x,

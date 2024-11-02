@@ -495,12 +495,12 @@ public class PlaygroundSplineInspector : Editor {
 		}
 		Handles.color = new Color(1f,.5f,0f);
 		if ((index==0||index%3==0)) {
-			if (Handles.Button(pointWithOffset, handleRotation, size * handleSize, size * pickSize, Handles.DotCap)) {
+			if (Handles.Button(pointWithOffset, handleRotation, size * handleSize, size * pickSize, Handles.DotHandleCap)) {
 				selectedIndex = SelectIndex(index);
 				Repaint();
 			}
 		} else {
-			if (Handles.Button(pointWithOffset, bezierHandleRotation, size * handleSize, size * pickSize, Handles.CircleCap)) {
+			if (Handles.Button(pointWithOffset, bezierHandleRotation, size * handleSize, size * pickSize, Handles.CircleHandleCap)) {
 				selectedIndex = SelectIndex(index);
 				Repaint();
 			}

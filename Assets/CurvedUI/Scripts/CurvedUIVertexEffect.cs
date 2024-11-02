@@ -107,7 +107,7 @@ public partial class CurvedUIVertexEffect : BaseMeshEffect {
     Vector3 savedUp;
     Vector2 savedRectSize;
     Color savedColor;
-    Vector2 savedTextUV0;
+    Vector4 savedTextUV0;
 
     List<UIVertex> tesselatedVerts;
 
@@ -473,7 +473,7 @@ public partial class CurvedUIVertexEffect : BaseMeshEffect {
 			};
 			
 			//2. interpolate all the vertex properties using weighting factors
-			Vector2 uv0 = Vector2.zero, uv1 = Vector2.zero;
+			Vector4 uv0 = Vector2.zero, uv1 = Vector2.zero;
 			Vector3 pos = Vector3.zero;
 
 			for(int i =0; i < 4; i++){
