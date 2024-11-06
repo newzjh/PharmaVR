@@ -214,6 +214,7 @@ namespace UnifiedInput
             }
 #endif
 
+            FetchInputSystem();
             GazeManager.Instance.UpdateEx();
     
         }
@@ -462,24 +463,14 @@ namespace UnifiedInput
 
         private static Vector3 lastmousepos=Vector3.zero;
 
-        private void LateUpdate()
+        private void FetchInputSystem()
         {
             _lastMousePosition = mousePosition;
-
-            CurObj = null;
-            OnUI = false;
-            CurUIRaycast = new RaycastResult();
-            if (GazeManager.Instance && GazeManager.Instance.current.FocusedObject)
-            {
-                CurObj = GazeManager.Instance.current.FocusedObject;
-                OnUI = GazeManager.Instance.current.OnUI;
-                CurUIRaycast = GazeManager.Instance.current.UIRaycast;
-            }
 
 #if ENABLE_INPUT_SYSTEM
             if (MouseEnable) //up by mouse first
                 _curMousePosition = Mouse.current.position.ReadValue();
-            if (TouchManager.TouchEnable && TouchManager.TouchCount > 0) //then up by touch
+            else if (TouchManager.TouchEnable && TouchManager.TouchCount > 0) //then up by touch
                 _curMousePosition = TouchManager.screenPosition;
 #endif
 
@@ -597,15 +588,32 @@ namespace UnifiedInput
             if (bUp[0])
                 _upMousePosition = mousePosition;
 
-            if (bUp[0] && _upMousePosition== _downMousePosition && CurUIRaycast.gameObject)
+        }
+
+        private void LateUpdate()
+        {
+            CurObj = null;
+            OnUI = false;
+            CurUIRaycast = new RaycastResult();
+            if (GazeManager.Instance && GazeManager.Instance.current.FocusedObject)
             {
-                var button = CurUIRaycast.gameObject.GetComponentInParent<UnityEngine.UI.Button>();
-                PointerEventData ped = new PointerEventData(EventSystem.current);
-                ped.position = mousePosition;
-                ped.button = PointerEventData.InputButton.Left;
-                ped.clickCount = 1;
-                if (button)
-                    button.OnPointerClick(ped);
+                CurObj = GazeManager.Instance.current.FocusedObject;
+                OnUI = GazeManager.Instance.current.OnUI;
+                CurUIRaycast = GazeManager.Instance.current.UIRaycast;
+            }
+
+            if (bGazeMode)
+            {
+                if (bUp[0] && _upMousePosition == _downMousePosition && CurUIRaycast.gameObject)
+                {
+                    var button = CurUIRaycast.gameObject.GetComponentInParent<UnityEngine.UI.Button>();
+                    PointerEventData ped = new PointerEventData(EventSystem.current);
+                    ped.position = mousePosition;
+                    ped.button = PointerEventData.InputButton.Left;
+                    ped.clickCount = 1;
+                    if (button)
+                        button.OnPointerClick(ped);
+                }
             }
         }
 

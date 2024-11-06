@@ -219,13 +219,26 @@ namespace UnifiedInput
                 }
                 else
                 {
-                    // If the raycast does not hit a hologram, default the position to last hit distance in front of the user,
-                    // and the normal to face the user.
-                    Vector3 gazeOrigin = Camera.main.transform.position;
-                    Vector3 gazeDirection = Camera.main.transform.forward;
-                    ret.Position = gazeOrigin + (gazeDirection * lastHitDistance);
-                    ret.Normal = -gazeDirection;   //The normal of the surface the ray hit.
-                    ret.FocusedObject = null;
+                    //if (UnifiedInputManager.bGazeMode)
+                    //{
+                    //    // If the raycast does not hit a hologram, default the position to last hit distance in front of the user,
+                    //    // and the normal to face the user.
+                    //    Vector3 gazeOrigin = Camera.main.transform.position;
+                    //    Vector3 gazeDirection = Camera.main.transform.forward;
+                    //    ret.Position = gazeOrigin + (gazeDirection * lastHitDistance);
+                    //    ret.Normal = -gazeDirection;   //The normal of the surface the ray hit.
+                    //    ret.FocusedObject = null;
+                    //}
+                    //else
+                    {
+                        // If the raycast does not hit a hologram, default the position to last hit distance in front of the user,
+                        // and the normal to face the user.
+                        Vector3 gazeOrigin = ray.origin;
+                        Vector3 gazeDirection = ray.direction;
+                        ret.Position = gazeOrigin + (gazeDirection * lastHitDistance);
+                        ret.Normal = -gazeDirection;   //The normal of the surface the ray hit.
+                        ret.FocusedObject = null;
+                    }
                 }
             }
             return ret;

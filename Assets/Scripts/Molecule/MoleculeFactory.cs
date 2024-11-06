@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.IO;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
+using System.Net;
+using UnityEngine.Networking;
 
 namespace MoleculeLogic
 {
@@ -187,17 +189,20 @@ namespace MoleculeLogic
             controllerobj.transform.localPosition = Vector3.zero;
             MoleculeController mc = controllerobj.AddComponent<MoleculeController>();
 
-            WWW www = new WWW(url);
-            yield return www;
-            if (www.bytes == null || www.bytesDownloaded <= 0)
+            var r = UnityWebRequest.Get(url);
+            yield return r.SendWebRequest();
+
+            if (r.downloadedBytes <= 0 || r.downloadHandler.data == null)
             {
                 yield break;
             }
 
-            mc.CacheFile(filename, www.bytes);
+            var data = r.downloadHandler.data;
+
+            mc.CacheFile(filename, data);
             mc.url = url;
 
-            MemoryStream ms = new MemoryStream(www.bytes);
+            MemoryStream ms = new MemoryStream(data);
             mc.CreateFromStream(ms, ext);
 
             ResetChildTransforms();
