@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using MoleculeLogic;
 using UnifiedInput;
+using UnityEngine.Networking;
 
 namespace MoleculeUI
 {
@@ -71,7 +72,11 @@ namespace MoleculeUI
         {
             string pdbid = pdbStr;
             pdbid = pdbid.Replace("\n", "");
+#if UNITY_WEBGL && !UNITY_EDITOR
+            string url = "./fetch.php?http://www.rcsb.org/pdb/download/downloadFile.do?fileFormat=pdb&compression=NO&structureId=" + pdbid;
+#else
             string url = "http://www.rcsb.org/pdb/download/downloadFile.do?fileFormat=pdb&compression=NO&structureId=" + pdbid;
+#endif
             mf.StartCoroutine(mf.CreateFromInternet(url, "pdb" + pdbid, ".pdb"));
             DynamicPanel.Instance.SetAllVis(false);
         }
