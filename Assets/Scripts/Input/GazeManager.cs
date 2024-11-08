@@ -164,6 +164,10 @@ namespace UnifiedInput
                         Vector3 end = linePoints[numPoints - 1];
                         Vector3 dir = (end - start).normalized;
                         ray = new Ray(start, dir);
+                        Transform camtran = Camera.main.transform;
+                        Plane p = new Plane(camtran.forward, camtran.position + camtran.forward * 2.0f);
+                        if (p.Raycast(ray, out var d))
+                            end = start + dir * d;
                         screenpt = Camera.main.WorldToScreenPoint(end);
                     }
                     else
@@ -172,6 +176,10 @@ namespace UnifiedInput
                         Vector3 dir = RayInteractor.transform.forward;
                         Vector3 end = start + dir * RayInteractor.endPointDistance;
                         ray = new Ray(start, dir);
+                        Transform camtran = Camera.main.transform;
+                        Plane p = new Plane(camtran.forward, camtran.position + camtran.forward * 2.0f);
+                        if (p.Raycast(ray, out var d))
+                            end = start + dir * d;
                         screenpt = Camera.main.WorldToScreenPoint(end);
                     }
                 }
@@ -181,14 +189,19 @@ namespace UnifiedInput
                     Vector3 dir = RayInteractor.transform.forward;
                     Vector3 end = start + dir * RayInteractor.endPointDistance;
                     ray = new Ray(start, dir);
+                    Transform camtran = Camera.main.transform;
+                    Plane p = new Plane(camtran.forward, camtran.position + camtran.forward * 2.0f);
+                    if (p.Raycast(ray, out var d))
+                        end = start + dir * d;
                     screenpt = Camera.main.WorldToScreenPoint(end);
                 }
             }
             else
             {
                 screenpt = UnifiedInputManager.mousePosition;
-                ray = Camera.main.ScreenPointToRay(screenpt);
             }
+
+            ray = Camera.main.ScreenPointToRay(screenpt);
 
             List<RaycastResult> uihitresults = new List<RaycastResult>();
             if (RaycaseUIObject(screenpt, ref uihitresults))

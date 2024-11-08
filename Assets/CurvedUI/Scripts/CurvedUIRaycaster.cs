@@ -126,32 +126,32 @@ public class CurvedUIRaycaster : GraphicRaycaster{
             }
         }
 
-        if(mySettings.Angle != 0 && mySettings.enabled) { // use custom raycasting only if Curved effect is enabled
-            Vector2 remappedPosition = eventData.position;
+      //  if(mySettings.Angle != 0 && mySettings.enabled) { // use custom raycasting only if Curved effect is enabled
+      //      Vector2 remappedPosition = eventData.position;
 
-            //Test only this object's layer if settings require it.
-            int myLayerMask = -1;
-            if (mySettings.RaycastMyLayerOnly)  {
-                myLayerMask = 1 << this.gameObject.layer;
-            }
+      //      //Test only this object's layer if settings require it.
+      //      int myLayerMask = -1;
+      //      if (mySettings.RaycastMyLayerOnly)  {
+      //          myLayerMask = 1 << this.gameObject.layer;
+      //      }
 
-            switch (mySettings.Shape){ 
-			    //find if we hit anything, if not, do nothing
-			    case CurvedUISettings.CurvedUIShape.CYLINDER:{
-				    if (!RaycastToCyllinderCanvas(ray3D, out remappedPosition, false, myLayerMask))return;
-				    break;
-			    }	case CurvedUISettings.CurvedUIShape.RING:{
-				    if (!RaycastToRingCanvas(ray3D, out remappedPosition, false, myLayerMask))return;
-				    break;
-			    }	case CurvedUISettings.CurvedUIShape.SPHERE:{
-				    if (!RaycastToSphereCanvas(ray3D, out remappedPosition, false, myLayerMask))return;
-				    break;
-			    }
-		    }
-            // Update event data
-            eventData.position = remappedPosition;
+      //      switch (mySettings.Shape){ 
+			   // //find if we hit anything, if not, do nothing
+			   // case CurvedUISettings.CurvedUIShape.CYLINDER:{
+				  //  if (!RaycastToCyllinderCanvas(ray3D, out remappedPosition, false, myLayerMask))return;
+				  //  break;
+			   // }	case CurvedUISettings.CurvedUIShape.RING:{
+				  //  if (!RaycastToRingCanvas(ray3D, out remappedPosition, false, myLayerMask))return;
+				  //  break;
+			   // }	case CurvedUISettings.CurvedUIShape.SPHERE:{
+				  //  if (!RaycastToSphereCanvas(ray3D, out remappedPosition, false, myLayerMask))return;
+				  //  break;
+			   // }
+		    //}
+      //      // Update event data
+      //      eventData.position = remappedPosition;
         
-        }
+      //  }
 
 		// Use base class raycast method to finish the raycast if we hit anything
 		base.Raycast(eventData, resultAppendList);

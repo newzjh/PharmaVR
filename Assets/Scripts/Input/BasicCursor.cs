@@ -59,13 +59,23 @@ namespace UnifiedInput
             Vector3 worldpos = GazeManager.GazeWorldPosition;
             Vector3 vec = (worldpos - Camera.main.transform.position);
             Vector3 dir = vec.normalized;
-            float len = 3.0f;
-            if (len > vec.magnitude-1.0f)
-                len = 0.5f;
-            this.gameObject.transform.position = worldpos;// - dir * len;
+            //float len = 3.0f;
+            //if (len > vec.magnitude-1.0f)
+            //    len = 0.5f;
+            //this.gameObject.transform.position = worldpos;// - dir * len;
+
+            //// Reorient the cursor to match the hit object normal.
+            //this.gameObject.transform.up = GazeManager.Instance.current.Normal;
+            //this.gameObject.transform.rotation *= cursorDefaultRotation;
+
+
+            float len = 0.4f;
+            if (len > vec.magnitude)
+                len = 0.0f;
+            this.gameObject.transform.position = worldpos - dir * len;
 
             // Reorient the cursor to match the hit object normal.
-            this.gameObject.transform.up = GazeManager.Instance.current.Normal;
+            this.gameObject.transform.up = Camera.main.transform.forward;
             this.gameObject.transform.rotation *= cursorDefaultRotation;
         }
 

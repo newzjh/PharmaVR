@@ -39,7 +39,8 @@ Shader "HoloToolkit/Cursor"
 		Cull Off
 		Lighting Off
 		ZWrite Off
-		ZTest [unity_GUIZTestMode]
+		//ZTest [unity_GUIZTestMode]
+		ZTest Off
 		Blend SrcAlpha OneMinusSrcAlpha
 		ColorMask [_ColorMask]
 
